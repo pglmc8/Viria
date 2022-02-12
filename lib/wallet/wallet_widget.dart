@@ -28,7 +28,7 @@ class _WalletWidgetState extends State<WalletWidget> {
                 width: MediaQuery.of(context).size.width,
                 height: 100,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.background,
+                  color: FlutterFlowTheme.of(context).background,
                 ),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
@@ -40,10 +40,10 @@ class _WalletWidgetState extends State<WalletWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                         child: Text(
                           'Wallet',
-                          style: FlutterFlowTheme.title1.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.dark900,
-                          ),
+                          style: FlutterFlowTheme.of(context).title1.override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).dark900,
+                              ),
                         ),
                       ),
                     ],
@@ -66,7 +66,10 @@ class _WalletWidgetState extends State<WalletWidget> {
                           )
                         ],
                         gradient: LinearGradient(
-                          colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                          colors: [
+                            Color(0xFF002B3F),
+                            FlutterFlowTheme.of(context).customColor2
+                          ],
                           stops: [0, 1],
                           begin: AlignmentDirectional(0.94, -1),
                           end: AlignmentDirectional(-0.94, 1),
@@ -104,12 +107,14 @@ class _WalletWidgetState extends State<WalletWidget> {
                                           0, 20, 0, 0),
                                       child: Text(
                                         '\$5.00',
-                                        style: FlutterFlowTheme.title1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF262D34),
-                                          fontSize: 32,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .title1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF262D34),
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                       ),
                                     ),
                                   ],
@@ -125,13 +130,14 @@ class _WalletWidgetState extends State<WalletWidget> {
                                   children: [
                                     Text(
                                       'Valable jusqu\'au 25/02',
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Roboto Mono',
-                                        color: Color(0xFF262D34),
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.normal,
-                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Roboto Mono',
+                                            color: Color(0xFF262D34),
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.normal,
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -156,7 +162,10 @@ class _WalletWidgetState extends State<WalletWidget> {
                           )
                         ],
                         gradient: LinearGradient(
-                          colors: [Color(0xFF00968A), Color(0xFFF2A384)],
+                          colors: [
+                            Color(0xFF002B3F),
+                            FlutterFlowTheme.of(context).customColor2
+                          ],
                           stops: [0, 1],
                           begin: AlignmentDirectional(0.94, -1),
                           end: AlignmentDirectional(-0.94, 1),
@@ -193,12 +202,14 @@ class _WalletWidgetState extends State<WalletWidget> {
                                         0, 20, 0, 0),
                                     child: Text(
                                       '\$10.00',
-                                      style: FlutterFlowTheme.title1.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xFF262D34),
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .title1
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Color(0xFF262D34),
+                                            fontSize: 32,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                     ),
                                   ),
                                 ],
@@ -214,12 +225,14 @@ class _WalletWidgetState extends State<WalletWidget> {
                                 children: [
                                   Text(
                                     'Valable jusqu\'au 25/02',
-                                    style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Roboto Mono',
-                                      color: Color(0xFF262D34),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Roboto Mono',
+                                          color: Color(0xFF262D34),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                        ),
                                   ),
                                 ],
                               ),

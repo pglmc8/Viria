@@ -19,7 +19,8 @@ class _RegisterWidgetState extends State<RegisterWidget>
     with TickerProviderStateMixin {
   TextEditingController confirmPasswordController;
   bool confirmPasswordVisibility;
-  TextEditingController emailAddressController;
+  TextEditingController emailAddressController1;
+  TextEditingController emailAddressController2;
   TextEditingController passwordController;
   bool passwordVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -53,7 +54,9 @@ class _RegisterWidgetState extends State<RegisterWidget>
 
     confirmPasswordController = TextEditingController();
     confirmPasswordVisibility = false;
-    emailAddressController = TextEditingController();
+    emailAddressController1 =
+        TextEditingController(text: currentUserDisplayName);
+    emailAddressController2 = TextEditingController();
     passwordController = TextEditingController();
     passwordVisibility = false;
   }
@@ -62,7 +65,7 @@ class _RegisterWidgetState extends State<RegisterWidget>
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.background,
+      backgroundColor: FlutterFlowTheme.of(context).background,
       body: Align(
         alignment: AlignmentDirectional(-0.14, -0.08),
         child: Container(
@@ -93,70 +96,106 @@ class _RegisterWidgetState extends State<RegisterWidget>
                   ).animated([animationsMap['imageOnPageLoadAnimation']]),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(40, 0, 40, 12),
+                  padding: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 15),
                   child: Container(
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.tertiaryColor,
+                      color: FlutterFlowTheme.of(context).tertiaryColor,
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(
-                        color: FlutterFlowTheme.tertiaryColor,
+                        color: FlutterFlowTheme.of(context).tertiaryColor,
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(12, 0, 20, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
+                      child: AuthUserStreamWidget(
+                        child: TextFormField(
+                          controller: emailAddressController1,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                            labelText: 'Your Name',
+                            labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Color(0x00000000),
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context).dark900,
+                                  ),
+                          keyboardType: TextInputType.name,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 15),
+                  child: Container(
+                    width: double.infinity,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.of(context).tertiaryColor,
+                      borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: FlutterFlowTheme.of(context).tertiaryColor,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                       child: TextFormField(
-                        controller: emailAddressController,
+                        controller: emailAddressController2,
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Email Address',
-                          labelStyle: FlutterFlowTheme.bodyText1,
-                          hintText: 'Email Address',
-                          hintStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.dark900,
-                          ),
+                          labelStyle: FlutterFlowTheme.of(context).bodyText1,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
                               width: 1,
                             ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+                            borderRadius: BorderRadius.circular(0),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
                               width: 1,
                             ),
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4.0),
-                              topRight: Radius.circular(4.0),
-                            ),
+                            borderRadius: BorderRadius.circular(0),
                           ),
                         ),
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.dark900,
-                        ),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).dark900,
+                            ),
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(40, 0, 40, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 15),
                   child: Container(
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.tertiaryColor,
+                      color: FlutterFlowTheme.of(context).tertiaryColor,
                       borderRadius: BorderRadius.circular(25),
                       border: Border.all(
-                        color: FlutterFlowTheme.tertiaryColor,
+                        color: FlutterFlowTheme.of(context).tertiaryColor,
                       ),
                     ),
                     child: Padding(
@@ -166,15 +205,12 @@ class _RegisterWidgetState extends State<RegisterWidget>
                         obscureText: !passwordVisibility,
                         decoration: InputDecoration(
                           labelText: 'Choose Password',
-                          labelStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.grayDark,
-                          ),
-                          hintText: 'Choose Password',
-                          hintStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.dark900,
-                          ),
+                          labelStyle: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).grayDark,
+                              ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
@@ -203,27 +239,30 @@ class _RegisterWidgetState extends State<RegisterWidget>
                               passwordVisibility
                                   ? Icons.visibility_outlined
                                   : Icons.visibility_off_outlined,
-                              color: FlutterFlowTheme.grayDark,
+                              color: FlutterFlowTheme.of(context).grayDark,
                               size: 24,
                             ),
                           ),
                         ),
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.dark900,
-                        ),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).dark900,
+                            ),
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(40, 0, 40, 20),
+                  padding: EdgeInsetsDirectional.fromSTEB(40, 10, 40, 15),
                   child: Container(
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.tertiaryColor,
+                      color: FlutterFlowTheme.of(context).tertiaryColor,
                       borderRadius: BorderRadius.circular(25),
+                      border: Border.all(
+                        color: Colors.white,
+                      ),
                     ),
                     child: Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(12, 0, 20, 0),
@@ -232,12 +271,7 @@ class _RegisterWidgetState extends State<RegisterWidget>
                         obscureText: !confirmPasswordVisibility,
                         decoration: InputDecoration(
                           labelText: 'Confirm Password',
-                          labelStyle: FlutterFlowTheme.bodyText1,
-                          hintText: 'Confirm Password',
-                          hintStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.dark900,
-                          ),
+                          labelStyle: FlutterFlowTheme.of(context).bodyText1,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               color: Color(0x00000000),
@@ -267,62 +301,65 @@ class _RegisterWidgetState extends State<RegisterWidget>
                               confirmPasswordVisibility
                                   ? Icons.visibility_outlined
                                   : Icons.visibility_off_outlined,
-                              color: FlutterFlowTheme.grayDark,
+                              color: FlutterFlowTheme.of(context).grayDark,
                               size: 24,
                             ),
                           ),
                         ),
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.dark900,
-                        ),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).dark900,
+                            ),
                       ),
                     ),
                   ),
                 ),
-                FFButtonWidget(
-                  onPressed: () async {
-                    if (passwordController.text !=
-                        confirmPasswordController.text) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            "Passwords don't match!",
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      if (passwordController.text !=
+                          confirmPasswordController.text) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              'Passwords don\'t match!',
+                            ),
                           ),
-                        ),
+                        );
+                        return;
+                      }
+
+                      final user = await createAccountWithEmail(
+                        context,
+                        emailAddressController2.text,
+                        passwordController.text,
                       );
-                      return;
-                    }
+                      if (user == null) {
+                        return;
+                      }
 
-                    final user = await createAccountWithEmail(
-                      context,
-                      emailAddressController.text,
-                      passwordController.text,
-                    );
-                    if (user == null) {
-                      return;
-                    }
-
-                    await Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NavBarPage(initialPage: 'Home'),
+                      await Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NavBarPage(initialPage: 'Home'),
+                        ),
+                        (r) => false,
+                      );
+                    },
+                    text: 'Create Account',
+                    options: FFButtonOptions(
+                      width: 300,
+                      height: 55,
+                      color: FlutterFlowTheme.of(context).customColor2,
+                      textStyle: FlutterFlowTheme.of(context).subtitle2,
+                      elevation: 4,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 2,
                       ),
-                      (r) => false,
-                    );
-                  },
-                  text: 'Create Account',
-                  options: FFButtonOptions(
-                    width: 300,
-                    height: 55,
-                    color: FlutterFlowTheme.customColor2,
-                    textStyle: FlutterFlowTheme.subtitle2,
-                    elevation: 4,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 2,
+                      borderRadius: 30,
                     ),
-                    borderRadius: 30,
                   ),
                 ),
                 Padding(
@@ -335,7 +372,7 @@ class _RegisterWidgetState extends State<RegisterWidget>
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                         child: Text(
                           'Already have an account?',
-                          style: FlutterFlowTheme.bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
                       FFButtonWidget(
@@ -356,10 +393,12 @@ class _RegisterWidgetState extends State<RegisterWidget>
                           width: 100,
                           height: 40,
                           color: Color(0x004B39EF),
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.grayIcon,
-                          ),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .subtitle2
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).grayIcon,
+                              ),
                           elevation: 0,
                           borderSide: BorderSide(
                             color: Colors.transparent,

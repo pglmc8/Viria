@@ -1,7 +1,9 @@
 import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_google_map.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,23 +15,37 @@ class BoxMapWidget extends StatefulWidget {
 }
 
 class _BoxMapWidgetState extends State<BoxMapWidget> {
+  LatLng currentUserLocationValue;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   LatLng googleMapsCenter;
   Completer<GoogleMapController> googleMapsController;
   TextEditingController textController;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+    getCurrentUserLocation(defaultLocation: LatLng(0.0, 0.0), cached: true)
+        .then((loc) => setState(() => currentUserLocationValue = loc));
     textController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (currentUserLocationValue == null) {
+      return Center(
+        child: SizedBox(
+          width: 50,
+          height: 50,
+          child: CircularProgressIndicator(
+            color: FlutterFlowTheme.of(context).customColor2,
+          ),
+        ),
+      );
+    }
     return Scaffold(
       key: scaffoldKey,
       resizeToAvoidBottomInset: false,
-      backgroundColor: FlutterFlowTheme.background,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -45,7 +61,7 @@ class _BoxMapWidgetState extends State<BoxMapWidget> {
                       width: MediaQuery.of(context).size.width,
                       height: 108,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.background,
+                        color: FlutterFlowTheme.of(context).background,
                         shape: BoxShape.rectangle,
                       ),
                       child: Padding(
@@ -57,13 +73,16 @@ class _BoxMapWidgetState extends State<BoxMapWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Text(
-                                  'Bonjour ',
-                                  style: FlutterFlowTheme.title1.override(
-                                    fontFamily: 'Lexend Deca',
-                                    color: FlutterFlowTheme.dark900,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  'Hello',
+                                  style: FlutterFlowTheme.of(context)
+                                      .title1
+                                      .override(
+                                        fontFamily: 'Lexend Deca',
+                                        color: FlutterFlowTheme.of(context)
+                                            .dark900,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -71,12 +90,14 @@ class _BoxMapWidgetState extends State<BoxMapWidget> {
                                   child: AuthUserStreamWidget(
                                     child: Text(
                                       currentUserDisplayName,
-                                      style: FlutterFlowTheme.title1.override(
-                                        fontFamily: 'Lexend Deca',
-                                        color: Color(0xFF002B3F),
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .title1
+                                          .override(
+                                            fontFamily: 'Lexend Deca',
+                                            color: Color(0xFF002B3F),
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                     ),
                                   ),
                                 ),
@@ -89,13 +110,16 @@ class _BoxMapWidgetState extends State<BoxMapWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 4, 0, 0),
                                   child: Text(
-                                    'Trouvez des Box près de chez vous !',
-                                    style: FlutterFlowTheme.bodyText2.override(
-                                      fontFamily: 'Lexend Deca',
-                                      color: FlutterFlowTheme.grayDark,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500,
-                                    ),
+                                    'Find Boxes near you!',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Lexend Deca',
+                                          color: FlutterFlowTheme.of(context)
+                                              .grayDark,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                   ),
                                 ),
                               ],
@@ -116,23 +140,51 @@ class _BoxMapWidgetState extends State<BoxMapWidget> {
                     child: Container(
                       height: MediaQuery.of(context).size.height * 1,
                       decoration: BoxDecoration(),
-                      child: FlutterFlowGoogleMap(
-                        controller: googleMapsController,
-                        onCameraIdle: (latLng) => googleMapsCenter = latLng,
-                        initialLocation: googleMapsCenter ??=
-                            LatLng(13.106061, -59.613158),
-                        markerColor: GoogleMarkerColor.violet,
-                        mapType: MapType.normal,
-                        style: GoogleMapStyle.standard,
-                        initialZoom: 14,
-                        allowInteraction: true,
-                        allowZoom: true,
-                        showZoomControls: true,
-                        showLocation: true,
-                        showCompass: true,
-                        showMapToolbar: false,
-                        showTraffic: false,
-                        centerMapOnMarkerTap: true,
+                      child: StreamBuilder<List<BoxRecord>>(
+                        stream: queryBoxRecord(),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator(
+                                  color:
+                                      FlutterFlowTheme.of(context).customColor2,
+                                ),
+                              ),
+                            );
+                          }
+                          List<BoxRecord> googleMapBoxRecordList =
+                              snapshot.data;
+                          return FlutterFlowGoogleMap(
+                            controller: googleMapsController,
+                            onCameraIdle: (latLng) => googleMapsCenter = latLng,
+                            initialLocation: googleMapsCenter ??= functions
+                                .getUsersLocation(currentUserLocationValue),
+                            markers: (googleMapBoxRecordList ?? [])
+                                .map(
+                                  (googleMapBoxRecord) => FlutterFlowMarker(
+                                    googleMapBoxRecord.reference.path,
+                                    googleMapBoxRecord.location,
+                                  ),
+                                )
+                                .toList(),
+                            markerColor: GoogleMarkerColor.violet,
+                            mapType: MapType.normal,
+                            style: GoogleMapStyle.standard,
+                            initialZoom: 13,
+                            allowInteraction: true,
+                            allowZoom: true,
+                            showZoomControls: true,
+                            showLocation: true,
+                            showCompass: true,
+                            showMapToolbar: false,
+                            showTraffic: false,
+                            centerMapOnMarkerTap: true,
+                          );
+                        },
                       ),
                     ),
                   ),
@@ -189,14 +241,7 @@ class _BoxMapWidgetState extends State<BoxMapWidget> {
                                         controller: textController,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: 'Search box',
-                                          labelStyle: FlutterFlowTheme.bodyText1
-                                              .override(
-                                            fontFamily: 'Lexend Deca',
-                                            color: Color(0xFF95A1AC),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                                          labelText: 'Search Boxes',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -220,13 +265,14 @@ class _BoxMapWidgetState extends State<BoxMapWidget> {
                                             ),
                                           ),
                                         ),
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Lexend Deca',
-                                          color: Color(0xFF95A1AC),
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Lexend Deca',
+                                              color: Color(0xFF95A1AC),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                            ),
                                       ),
                                     ),
                                   ),

@@ -1,62 +1,87 @@
+// ignore_for_file: overridden_fields, annotate_overrides
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// ignore: avoid_classes_with_only_static_members
-class FlutterFlowTheme {
-  static const Color primaryColor = Color(0xFF4B39EF);
-  static const Color secondaryColor = Color(0xFFEE8B60);
-  static const Color tertiaryColor = Color(0xFFFFFFFF);
+abstract class FlutterFlowTheme {
+  static FlutterFlowTheme of(BuildContext context) => LightModeTheme();
 
-  static const Color grayDark = Color(0xFF616E78);
-  static const Color dark900 = Color(0xFF090F13);
-  static const Color background = Color(0xFFEEE5DE);
-  static const Color grayIcon = Color(0xFF95A1AC);
-  static const Color customColor2 = Color(0xFF39D2C0);
+  Color primaryColor;
+  Color secondaryColor;
+  Color tertiaryColor;
+  Color alternate;
+  Color primaryBackground;
+  Color secondaryBackground;
+  Color primaryText;
+  Color secondaryText;
 
-  String primaryFontFamily = 'Poppins';
-  String secondaryFontFamily = 'Roboto';
-  static TextStyle get title1 => GoogleFonts.getFont(
+  Color grayDark;
+  Color dark900;
+  Color background;
+  Color grayIcon;
+  Color customColor2;
+  Color customColor1;
+
+  TextStyle get title1 => GoogleFonts.getFont(
         'Poppins',
         color: tertiaryColor,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
-  static TextStyle get title2 => GoogleFonts.getFont(
+  TextStyle get title2 => GoogleFonts.getFont(
         'Poppins',
         color: tertiaryColor,
         fontWeight: FontWeight.w500,
         fontSize: 22,
       );
-  static TextStyle get title3 => GoogleFonts.getFont(
+  TextStyle get title3 => GoogleFonts.getFont(
         'Poppins',
         color: customColor2,
         fontWeight: FontWeight.w500,
         fontSize: 20,
       );
-  static TextStyle get subtitle1 => GoogleFonts.getFont(
+  TextStyle get subtitle1 => GoogleFonts.getFont(
         'Poppins',
         color: dark900,
         fontWeight: FontWeight.w500,
         fontSize: 18,
       );
-  static TextStyle get subtitle2 => GoogleFonts.getFont(
+  TextStyle get subtitle2 => GoogleFonts.getFont(
         'Poppins',
         color: tertiaryColor,
         fontWeight: FontWeight.normal,
         fontSize: 16,
       );
-  static TextStyle get bodyText1 => GoogleFonts.getFont(
+  TextStyle get bodyText1 => GoogleFonts.getFont(
         'Poppins',
         color: grayIcon,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
-  static TextStyle get bodyText2 => GoogleFonts.getFont(
+  TextStyle get bodyText2 => GoogleFonts.getFont(
         'Poppins',
         color: grayIcon,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
+}
+
+class LightModeTheme extends FlutterFlowTheme {
+  Color primaryColor = const Color(0xFF4B39EF);
+  Color secondaryColor = const Color(0xFFEE8B60);
+  Color tertiaryColor = const Color(0xFFFFFFFF);
+  Color alternate = const Color(0x00000000);
+  Color primaryBackground = const Color(0x00000000);
+  Color secondaryBackground = const Color(0x00000000);
+  Color primaryText = const Color(0x00000000);
+  Color secondaryText = const Color(0x00000000);
+
+  Color grayDark = Color(0xFF616E78);
+  Color dark900 = Color(0xFF090F13);
+  Color background = Color(0xFFEEE5DE);
+  Color grayIcon = Color(0xFF95A1AC);
+  Color customColor2 = Color(0xFF39D2C0);
+  Color customColor1 = Color(0xFF2C5936);
 }
 
 extension TextStyleHelper on TextStyle {

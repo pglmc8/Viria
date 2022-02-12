@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ActualitesWidget extends StatefulWidget {
-  const ActualitesWidget({Key key}) : super(key: key);
+class AwarenessWidget extends StatefulWidget {
+  const AwarenessWidget({Key key}) : super(key: key);
 
   @override
-  _ActualitesWidgetState createState() => _ActualitesWidgetState();
+  _AwarenessWidgetState createState() => _AwarenessWidgetState();
 }
 
-class _ActualitesWidgetState extends State<ActualitesWidget> {
+class _AwarenessWidgetState extends State<AwarenessWidget> {
   PageController pageViewController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -23,19 +23,19 @@ class _ActualitesWidgetState extends State<ActualitesWidget> {
         backgroundColor: Color(0xFF00293C),
         automaticallyImplyLeading: true,
         title: Text(
-          'Actualités',
-          style: FlutterFlowTheme.bodyText1.override(
-            fontFamily: 'Poppins',
-            color: FlutterFlowTheme.tertiaryColor,
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
+          'Awareness',
+          style: FlutterFlowTheme.of(context).bodyText1.override(
+                fontFamily: 'Poppins',
+                color: FlutterFlowTheme.of(context).tertiaryColor,
+                fontSize: 24,
+                fontWeight: FontWeight.w600,
+              ),
         ),
         actions: [],
         centerTitle: true,
         elevation: 4,
       ),
-      backgroundColor: FlutterFlowTheme.tertiaryColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -43,10 +43,12 @@ class _ActualitesWidgetState extends State<ActualitesWidget> {
             width: 10000,
             height: 10000,
             decoration: BoxDecoration(
-              color: Color(0xFFEEEEEE),
+              color: Colors.white,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: Container(
@@ -62,19 +64,19 @@ class _ActualitesWidgetState extends State<ActualitesWidget> {
                             scrollDirection: Axis.horizontal,
                             children: [
                               Image.asset(
-                                'assets/images/Viria_==_Canette.png',
+                                'assets/images/page_mtaux_slide_app.png',
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.cover,
                               ),
                               Image.asset(
-                                'assets/images/Viria_==_Cartons.png',
+                                'assets/images/page_verre_slide_app.png',
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.cover,
                               ),
                               Image.asset(
-                                'assets/images/Viria_==_Verre.png',
+                                'assets/images/page_carton_slide_app.png',
                                 width: 100,
                                 height: 100,
                                 fit: BoxFit.cover,
@@ -105,7 +107,7 @@ class _ActualitesWidgetState extends State<ActualitesWidget> {
                                 radius: 16,
                                 dotWidth: 16,
                                 dotHeight: 16,
-                                dotColor: FlutterFlowTheme.grayIcon,
+                                dotColor: FlutterFlowTheme.of(context).grayIcon,
                                 activeDotColor: Color(0xFF3F51B5),
                                 paintStyle: PaintingStyle.fill,
                               ),

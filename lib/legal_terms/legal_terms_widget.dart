@@ -22,12 +22,12 @@ class _LegalTermsWidgetState extends State<LegalTermsWidget> {
         automaticallyImplyLeading: true,
         title: Text(
           'Legal Terms',
-          style: FlutterFlowTheme.title1,
+          style: FlutterFlowTheme.of(context).title1,
         ),
         actions: [],
         centerTitle: true,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: FlutterFlowTheme.of(context).background,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -38,17 +38,18 @@ class _LegalTermsWidgetState extends State<LegalTermsWidget> {
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(5, 5, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                       child: Text(
                         'Terms of Use',
-                        style: FlutterFlowTheme.title1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.dark900,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).customColor2,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
+                            ),
                       ),
                     ),
                   ],
@@ -60,13 +61,23 @@ class _LegalTermsWidgetState extends State<LegalTermsWidget> {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 100,
+                        height: 300,
                         decoration: BoxDecoration(
                           color: Colors.white,
                         ),
-                        child: Text(
-                          '',
-                          style: FlutterFlowTheme.bodyText1,
+                        child: Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
+                          child: Text(
+                            '',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText2
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: FlutterFlowTheme.of(context).dark900,
+                                ),
+                          ),
                         ),
                       ),
                     ],
@@ -74,16 +85,18 @@ class _LegalTermsWidgetState extends State<LegalTermsWidget> {
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(5, 20, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: Text(
                         'Privacy Policy',
-                        style: FlutterFlowTheme.title1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.dark900,
-                          fontSize: 22,
-                        ),
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).title1.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.of(context).customColor2,
+                              fontSize: 25,
+                            ),
                       ),
                     ),
                   ],
@@ -95,13 +108,17 @@ class _LegalTermsWidgetState extends State<LegalTermsWidget> {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        height: 100,
+                        height: 300,
                         decoration: BoxDecoration(
                           color: Colors.white,
                         ),
                         child: Text(
-                          'Hello World',
-                          style: FlutterFlowTheme.bodyText1,
+                          '',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    color: FlutterFlowTheme.of(context).dark900,
+                                  ),
                         ),
                       ),
                     ],

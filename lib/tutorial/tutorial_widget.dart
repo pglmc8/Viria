@@ -21,10 +21,14 @@ class _TutorialWidgetState extends State<TutorialWidget> {
       appBar: AppBar(
         backgroundColor: Color(0xFF002B3F),
         automaticallyImplyLeading: true,
+        title: Text(
+          'Tutorial',
+          style: FlutterFlowTheme.of(context).title1,
+        ),
         actions: [],
         centerTitle: true,
       ),
-      backgroundColor: FlutterFlowTheme.background,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -33,16 +37,16 @@ class _TutorialWidgetState extends State<TutorialWidget> {
               Align(
                 alignment: AlignmentDirectional(0, -1),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                   child: Text(
-                    'Regardez notre vidéo pour comprendre comment commnencer à recycler ',
+                    'Watch our video to understand how to start recycling ',
                     textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Poppins',
-                      color: FlutterFlowTheme.customColor2,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Poppins',
+                          color: FlutterFlowTheme.of(context).customColor2,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
+                        ),
                   ),
                 ),
               ),

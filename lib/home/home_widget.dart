@@ -1,11 +1,11 @@
-import '../actualites/actualites_widget.dart';
 import '../auth/auth_util.dart';
+import '../awareness/awareness_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../photo/photo_widget.dart';
 import '../stats/stats_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -17,6 +17,7 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  var scan = '';
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +40,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                         child: Text(
-                          'Bonjour ',
-                          style: FlutterFlowTheme.title1.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.tertiaryColor,
-                          ),
+                          'Hello',
+                          style: FlutterFlowTheme.of(context).title1.override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).tertiaryColor,
+                              ),
                         ),
                       ),
                     ],
@@ -57,11 +59,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                       AuthUserStreamWidget(
                         child: Text(
                           currentUserDisplayName,
-                          style: FlutterFlowTheme.title2.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: FlutterFlowTheme.of(context).title2.override(
+                                fontFamily: 'Poppins',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                fontWeight: FontWeight.bold,
+                              ),
                         ),
                       ),
                     ],
@@ -78,32 +81,32 @@ class _HomeWidgetState extends State<HomeWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 166, 0),
-                            child: Material(
-                              color: Colors.transparent,
-                              elevation: 3,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.9,
-                                height: 250,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.customColor2,
+                            child: InkWell(
+                              onTap: () async {
+                                scan = await FlutterBarcodeScanner.scanBarcode(
+                                  '#C62828', // scanning line color
+                                  'Cancel', // cancel button text
+                                  true, // whether to show the flash icon
+                                  ScanMode.QR,
+                                );
+
+                                setState(() {});
+                              },
+                              child: Material(
+                                color: Colors.transparent,
+                                elevation: 3,
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: InkWell(
-                                  onTap: () async {
-                                    await Navigator.push(
-                                      context,
-                                      PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        duration: Duration(milliseconds: 300),
-                                        reverseDuration:
-                                            Duration(milliseconds: 300),
-                                        child: PhotoWidget(),
-                                      ),
-                                    );
-                                  },
+                                child: Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.9,
+                                  height: 250,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .customColor2,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -117,24 +120,28 @@ class _HomeWidgetState extends State<HomeWidget> {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
+                                              Icon(
+                                                Icons.qr_code,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .dark900,
+                                                size: 150,
+                                              ),
                                               Expanded(
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(0, 50, 0, 50),
-                                                  child: AutoSizeText(
-                                                    'Commencez à recycler !',
-                                                    textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme
-                                                        .title1
-                                                        .override(
-                                                      fontFamily: 'Poppins',
-                                                      fontSize: 38,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                    ),
-                                                  ),
+                                                child: AutoSizeText(
+                                                  'Scan !',
+                                                  textAlign: TextAlign.center,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .title1
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 36,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                      ),
                                                 ),
                                               ),
                                             ],
@@ -174,7 +181,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       MediaQuery.of(context).size.width * 0.9,
                                   height: 100,
                                   decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.primaryColor,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Row(
@@ -203,14 +211,17 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Stats',
+                                                'Statistics',
                                                 textAlign: TextAlign.start,
-                                                style: FlutterFlowTheme.title3
-                                                    .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: FlutterFlowTheme
-                                                      .tertiaryColor,
-                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .title3
+                                                        .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .tertiaryColor,
+                                                        ),
                                               ),
                                             ],
                                           ),
@@ -240,7 +251,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               type: PageTransitionType.fade,
                               duration: Duration(milliseconds: 300),
                               reverseDuration: Duration(milliseconds: 300),
-                              child: ActualitesWidget(),
+                              child: AwarenessWidget(),
                             ),
                           );
                         },
@@ -254,7 +265,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             width: MediaQuery.of(context).size.width * 0.9,
                             height: 100,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.primaryColor,
+                              color: FlutterFlowTheme.of(context).primaryColor,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Row(
@@ -282,14 +293,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          'Actualités',
+                                          'Awareness',
                                           textAlign: TextAlign.start,
-                                          style:
-                                              FlutterFlowTheme.title3.override(
-                                            fontFamily: 'Poppins',
-                                            color:
-                                                FlutterFlowTheme.tertiaryColor,
-                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .title3
+                                              .override(
+                                                fontFamily: 'Poppins',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .tertiaryColor,
+                                              ),
                                         ),
                                       ],
                                     ),

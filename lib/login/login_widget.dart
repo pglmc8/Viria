@@ -99,10 +99,10 @@ class _LoginWidgetState extends State<LoginWidget>
                         width: double.infinity,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: FlutterFlowTheme.tertiaryColor,
+                          color: FlutterFlowTheme.of(context).tertiaryColor,
                           boxShadow: [
                             BoxShadow(
-                              color: FlutterFlowTheme.tertiaryColor,
+                              color: FlutterFlowTheme.of(context).tertiaryColor,
                             )
                           ],
                           borderRadius: BorderRadius.circular(25),
@@ -114,12 +114,8 @@ class _LoginWidgetState extends State<LoginWidget>
                             obscureText: false,
                             decoration: InputDecoration(
                               labelText: 'Email Address',
-                              labelStyle: FlutterFlowTheme.bodyText1,
-                              hintText: 'Email Address',
-                              hintStyle: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Poppins',
-                                color: FlutterFlowTheme.dark900,
-                              ),
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).bodyText1,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
@@ -141,10 +137,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                 ),
                               ),
                             ),
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color: FlutterFlowTheme.dark900,
-                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: FlutterFlowTheme.of(context).dark900,
+                                ),
                             keyboardType: TextInputType.emailAddress,
                           ),
                         ),
@@ -156,7 +154,7 @@ class _LoginWidgetState extends State<LoginWidget>
                         width: double.infinity,
                         height: 50,
                         decoration: BoxDecoration(
-                          color: FlutterFlowTheme.tertiaryColor,
+                          color: FlutterFlowTheme.of(context).tertiaryColor,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
@@ -166,12 +164,8 @@ class _LoginWidgetState extends State<LoginWidget>
                             obscureText: !passwordVisibility,
                             decoration: InputDecoration(
                               labelText: 'Password',
-                              labelStyle: FlutterFlowTheme.bodyText1,
-                              hintText: 'Password',
-                              hintStyle: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Poppins',
-                                color: FlutterFlowTheme.dark900,
-                              ),
+                              labelStyle:
+                                  FlutterFlowTheme.of(context).bodyText1,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Color(0x00000000),
@@ -201,15 +195,17 @@ class _LoginWidgetState extends State<LoginWidget>
                                   passwordVisibility
                                       ? Icons.visibility_outlined
                                       : Icons.visibility_off_outlined,
-                                  color: FlutterFlowTheme.grayDark,
+                                  color: FlutterFlowTheme.of(context).grayDark,
                                   size: 24,
                                 ),
                               ),
                             ),
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                              color: FlutterFlowTheme.dark900,
-                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyText1
+                                .override(
+                                  fontFamily: 'Poppins',
+                                  color: FlutterFlowTheme.of(context).dark900,
+                                ),
                           ),
                         ),
                       ),
@@ -237,8 +233,8 @@ class _LoginWidgetState extends State<LoginWidget>
                       options: FFButtonOptions(
                         width: 300,
                         height: 55,
-                        color: FlutterFlowTheme.customColor2,
-                        textStyle: FlutterFlowTheme.subtitle2,
+                        color: FlutterFlowTheme.of(context).customColor2,
+                        textStyle: FlutterFlowTheme.of(context).subtitle2,
                         elevation: 4,
                         borderSide: BorderSide(
                           color: Colors.transparent,
@@ -254,10 +250,10 @@ class _LoginWidgetState extends State<LoginWidget>
                         borderRadius: 30,
                         borderWidth: 1,
                         buttonSize: 50,
-                        fillColor: FlutterFlowTheme.customColor2,
+                        fillColor: FlutterFlowTheme.of(context).customColor2,
                         icon: FaIcon(
                           FontAwesomeIcons.google,
-                          color: FlutterFlowTheme.tertiaryColor,
+                          color: FlutterFlowTheme.of(context).tertiaryColor,
                           size: 25,
                         ),
                         onPressed: () async {
@@ -286,7 +282,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
                             child: Text(
                               'Don\'t have an account?',
-                              style: FlutterFlowTheme.bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                           ),
                           FFButtonWidget(
@@ -306,11 +302,14 @@ class _LoginWidgetState extends State<LoginWidget>
                               width: 140,
                               height: 40,
                               color: Color(0x004B39EF),
-                              textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Poppins',
-                                color: FlutterFlowTheme.grayIcon,
-                                fontSize: 15,
-                              ),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .subtitle2
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color:
+                                        FlutterFlowTheme.of(context).grayIcon,
+                                    fontSize: 15,
+                                  ),
                               elevation: 0,
                               borderSide: BorderSide(
                                 color: Colors.transparent,
@@ -338,10 +337,12 @@ class _LoginWidgetState extends State<LoginWidget>
                           width: 200,
                           height: 55,
                           color: Color(0xFFF2E9E2),
-                          textStyle: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                            color: FlutterFlowTheme.grayIcon,
-                          ),
+                          textStyle: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Poppins',
+                                color: FlutterFlowTheme.of(context).grayIcon,
+                              ),
                           elevation: 0,
                           borderSide: BorderSide(
                             color: Colors.transparent,

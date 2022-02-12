@@ -1,4 +1,4 @@
-# Viria
+# Vyria
 
 A new Flutter project.
 
